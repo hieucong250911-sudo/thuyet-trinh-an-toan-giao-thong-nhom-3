@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1728">
+<title>An toàn giao thông ở địa phương em</title>
+<style>
+:root{--navy:#0b1728;--navy2:#122641;--cream:#f7f3e9;--yellow:#ffd166;--coral:#ff6b6b;--mint:#63d6b4;--blue:#73b7ff;--ink:#17243a;--muted:#64748b}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:var(--navy);color:white}
+button{font:inherit}.deck{position:relative;width:100%;height:100%;isolation:isolate;background:radial-gradient(circle at 80% 10%,#203b5d 0,transparent 34%),radial-gradient(circle at 8% 88%,#173452 0,transparent 30%),var(--navy)}
+.slide{position:absolute;inset:0;padding:clamp(24px,5vw,72px) clamp(24px,7vw,100px) 90px;display:flex;flex-direction:column;justify-content:center;opacity:0;visibility:hidden;transform:translateX(38px) scale(.99);transition:opacity .42s ease,transform .52s cubic-bezier(.2,.75,.25,1),visibility .42s;overflow:auto}
+.slide.active{opacity:1;visibility:visible;transform:translateX(0) scale(1);z-index:2}.slide.exit-left{transform:translateX(-38px) scale(.99)}
+.kicker{display:flex;align-items:center;gap:10px;text-transform:uppercase;letter-spacing:.16em;font-size:clamp(10px,1.2vw,13px);font-weight:800;color:var(--mint);margin-bottom:18px}.kicker:before{content:"";width:28px;height:3px;background:var(--mint);border-radius:8px}
+h1,h2,h3,p{margin-top:0}h1{font-size:clamp(44px,8.3vw,108px);line-height:.94;letter-spacing:-.065em;margin-bottom:22px;max-width:950px}h2{font-size:clamp(32px,5vw,64px);line-height:1.02;letter-spacing:-.045em;margin-bottom:24px}h3{font-size:clamp(18px,2.2vw,25px);margin-bottom:9px;letter-spacing:-.02em}p{line-height:1.65;color:#d0d9e6;font-size:clamp(15px,1.55vw,19px);max-width:780px}.accent{color:var(--yellow)}.mint{color:var(--mint)}.coral{color:var(--coral)}.blue{color:var(--blue)}.subtitle{font-size:clamp(17px,2vw,24px);max-width:650px;color:#c5d2e2}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.13em;font-weight:800;color:#9bb1c9}
+.cover{justify-content:center}.cover .big-number{position:absolute;right:7%;top:13%;font-size:clamp(150px,28vw,360px);font-weight:950;line-height:1;color:rgba(255,255,255,.035);letter-spacing:-.1em;pointer-events:none}.cover h1{position:relative;z-index:1}.cover .subtitle{position:relative;z-index:1}.cover-bottom{display:flex;gap:12px;align-items:center;margin-top:38px;color:#aabbd0;font-size:13px;font-weight:700;letter-spacing:.06em}.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid #3c536f;border-radius:99px;padding:9px 14px;color:#e7eef8;background:#14263d}
+.road-art{position:absolute;right:6%;bottom:9%;width:min(30vw,330px);height:min(30vw,330px);min-width:170px;min-height:170px;opacity:.95}.road-art .ring{position:absolute;inset:0;border:1px solid #3a536e;border-radius:50%}.road-art .ring:nth-child(2){inset:15%;border-style:dashed}.road-art .disc{position:absolute;inset:29%;border-radius:50%;background:var(--yellow);display:grid;place-items:center;color:var(--navy);font-size:clamp(35px,7vw,70px);box-shadow:0 0 70px #ffd16635}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,5vw,72px);align-items:center}.panel{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:clamp(20px,3vw,34px);backdrop-filter:blur(8px)}.list{display:grid;gap:12px}.person{display:flex;align-items:center;gap:13px;padding:12px 14px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);border-radius:14px;font-weight:650;color:#eaf0f8;font-size:clamp(13px,1.4vw,16px)}.num{flex:none;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:#203b59;color:var(--yellow);font-size:12px;font-weight:900}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}.stat{border-radius:18px;padding:20px;background:#152a43;border:1px solid #29425e}.stat strong{display:block;font-size:clamp(26px,4vw,46px);letter-spacing:-.05em;color:var(--yellow);margin-bottom:8px}.stat span{font-size:13px;line-height:1.4;color:#c1cfdf}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{position:relative;min-height:160px;padding:24px;border-radius:22px;background:var(--cream);color:var(--ink);overflow:hidden}.card p{color:#526074;font-size:15px;margin-bottom:0}.card .icon{font-size:29px;margin-bottom:17px}.card .tag{position:absolute;right:18px;top:17px;font-size:11px;font-weight:900;letter-spacing:.12em;color:#7b8798}.card.dark{background:#18304b;color:white;border:1px solid #34516f}.card.dark p{color:#c8d5e4}.card.yellow{background:var(--yellow)}.card.yellow p{color:#5c4b22}.card.mint-card{background:var(--mint)}.card.mint-card p{color:#164b42}
+.road-line{display:flex;align-items:center;gap:10px;margin:25px 0 12px}.road-line .lane{height:5px;flex:1;background:#324a65;border-radius:8px;position:relative}.road-line .lane:after{content:"";position:absolute;inset:1px 0;background:repeating-linear-gradient(90deg,transparent 0 18px,#b8c7d8 18px 34px,transparent 34px 50px)}.road-line .dot{width:15px;height:15px;background:var(--coral);border:3px solid #ffd1d1;border-radius:50%;box-shadow:0 0 0 6px #ff6b6b22}
+.risk-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}.bars{display:grid;gap:20px}.bar-label{display:flex;justify-content:space-between;gap:12px;font-size:14px;color:#dce6f2;margin-bottom:8px}.bar-track{height:12px;border-radius:99px;background:#243b56;overflow:hidden}.bar-fill{height:100%;border-radius:99px;transform:scaleX(0);transform-origin:left;transition:transform 1s .2s}.active .bar-fill{transform:scaleX(1)}.fill1{width:86%;background:var(--coral)}.fill2{width:68%;background:var(--yellow)}.fill3{width:52%;background:var(--blue)}.note{font-size:12px;color:#9db0c5;line-height:1.5;margin-top:14px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}.step{padding:20px 16px;border-top:3px solid var(--mint);background:rgba(255,255,255,.05);border-radius:0 0 16px 16px}.step .n{font-size:12px;color:var(--mint);font-weight:900;letter-spacing:.12em;margin-bottom:14px}.step p{font-size:14px;margin:0;color:#c5d2e2}
+.thanks{align-items:center;text-align:center}.thanks h2{font-size:clamp(55px,11vw,130px);margin-bottom:16px}.thanks p{margin-left:auto;margin-right:auto}.thanks .stamp{width:104px;height:104px;border:2px solid var(--yellow);border-radius:32px;transform:rotate(-8deg);display:grid;place-items:center;color:var(--yellow);font-size:48px;margin-bottom:28px;box-shadow:8px 8px 0 #ffd16620}
+.controls{position:absolute;z-index:10;left:0;right:0;bottom:0;display:flex;align-items:center;gap:14px;padding:16px clamp(18px,4vw,54px);background:linear-gradient(0deg,rgba(5,13,24,.95),rgba(5,13,24,.2));}.control-btn{border:1px solid #41556e;color:#f1f5fa;background:#14263c;border-radius:12px;width:44px;height:42px;cursor:pointer;transition:.2s;font-size:18px}.control-btn:hover{background:#264360;transform:translateY(-2px)}.control-btn:disabled{opacity:.3;cursor:not-allowed;transform:none}.progress-wrap{height:4px;background:#2b4058;border-radius:9px;flex:1;overflow:hidden}.progress{height:100%;width:10%;background:var(--yellow);border-radius:9px;transition:width .35s}.counter{font-size:12px;color:#c1cfdf;min-width:52px;text-align:center;font-variant-numeric:tabular-nums}.hint{font-size:11px;color:#7f94ad;white-space:nowrap}.dots{display:flex;gap:5px}.dots button{border:0;padding:0;width:6px;height:6px;border-radius:99px;background:#52667e;cursor:pointer}.dots button.active{width:18px;background:var(--yellow)}
+@media(max-width:760px){.slide{padding:26px 22px 92px;justify-content:flex-start;padding-top:42px}.slide.cover,.slide.thanks{justify-content:center}.two-col,.risk-layout{grid-template-columns:1fr}.two-col{gap:18px}.road-art{right:6%;bottom:13%;width:145px;height:145px;min-width:145px;min-height:145px;opacity:.5}.cover .big-number{top:14%;right:2%}.cards{gap:10px}.card{padding:17px;min-height:145px}.stat-grid{gap:8px}.stat{padding:13px}.steps{grid-template-columns:repeat(2,1fr)}.hint{display:none}.person{padding:8px 10px}.num{width:26px;height:26px}.controls{gap:9px}.dots{display:none}}
+@media(max-height:650px) and (min-width:761px){.slide{padding-top:24px}.panel{padding:20px}.person{padding:8px 12px}.card{min-height:125px;padding:18px}.card .icon{margin-bottom:8px}.stat-grid{margin-top:12px}.road-art{width:210px;height:210px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<style id="schoolbook-theme">
+:root{--navy:#f1f5f5;--navy2:#ffffff;--cream:#fffdf6;--yellow:#ffbf3f;--coral:#f0784d;--mint:#4f9b69;--blue:#76c5e8;--ink:#283a36;--muted:#63756f}
+html,body{background:#dfe9ec!important;color:var(--ink)!important;font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif!important}
+.deck{background:linear-gradient(180deg,#d8e8ee 0%,#edf0df 100%)!important;color:var(--ink)!important;overflow:hidden}
+.deck:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.28;background-image:radial-gradient(#7c9996 1px,transparent 1px);background-size:18px 18px}
+.slide{padding:clamp(24px,4vw,58px) clamp(24px,6vw,84px) 88px!important;color:var(--ink)!important}
+.slide:before{content:"";position:absolute;inset:clamp(12px,2vw,26px);border:2px solid rgba(78,94,86,.32);border-radius:24px;pointer-events:none;z-index:0}
+.slide>*:not(.scene-doodle):not(.big-number):not(.road-art){position:relative;z-index:1}
+.kicker{color:#d95e36!important;letter-spacing:.09em!important;font-size:clamp(11px,1.1vw,14px)!important;font-weight:900!important;margin-bottom:14px!important}
+.kicker:before{background:#d95e36!important;width:23px!important;height:4px!important;border-radius:2px!important}
+h1,h2,h3{font-family:Georgia,"Trebuchet MS",serif!important;letter-spacing:-.025em!important;color:#30473b!important}
+h1{font-size:clamp(42px,7.1vw,92px)!important;line-height:.98!important;letter-spacing:-.045em!important;text-shadow:2px 2px 0 #fff8e9!important}
+h2{font-size:clamp(30px,4.3vw,56px)!important;line-height:1.05!important;margin-bottom:18px!important;text-shadow:1px 1px 0 #fff8e9}
+h3{font-size:clamp(17px,2vw,24px)!important}
+p{color:#4e625b!important;line-height:1.55!important;font-size:clamp(14px,1.4vw,18px)!important}
+.accent{color:#e9a91d!important}.mint{color:#398653!important}.coral{color:#d85f46!important}.blue{color:#348db4!important}.subtitle{color:#4c655d!important}
+.eyebrow{color:#72837b!important}
+.cover{background:transparent!important}.cover .big-number{color:rgba(64,111,86,.09)!important;font-family:Georgia,serif!important}
+.cover .kicker{background:#fffdf6;border:2px solid #67756d;box-shadow:4px 5px 0 #8b9990;border-radius:8px;padding:10px 16px;width:max-content;max-width:90%}
+.cover h1{background:#fffdf6;border:3px solid #67756d;box-shadow:7px 8px 0 #a2aaa3;border-radius:12px;padding:clamp(18px,3vw,34px);max-width:790px}
+.cover h1 .accent{color:#f0b61c!important}.cover-bottom{flex-wrap:wrap;color:#4e625b!important}
+.pill{background:#fffdf6!important;color:#3e5e4b!important;border:2px solid #8d9c90!important;border-radius:10px!important;box-shadow:3px 3px 0 #b2b9af!important;font-size:12px!important}
+.road-art{opacity:.92!important;filter:drop-shadow(4px 5px 0 #a4b0a8);z-index:1}.road-art .ring{border-color:#5e7968!important}.road-art .ring:nth-child(2){border-color:#739584!important}.road-art .disc{background:#fffdf6!important;border:3px solid #52685b;color:#d95e36!important;box-shadow:4px 4px 0 #a2b0a4!important}
+.panel{background:#fffdf6!important;border:2px solid #68766e!important;border-radius:13px!important;box-shadow:5px 6px 0 #b4bdb5!important;backdrop-filter:none!important}
+.person{background:#fffdf6!important;border:1.5px solid #a5b0a5!important;border-radius:9px!important;color:#344c40!important;box-shadow:2px 2px 0 #d1d7cb!important}
+.num{background:#e4f0df!important;color:#3c7950!important;border:1px solid #7fa087!important;border-radius:50%!important}
+.stat{background:#fffdf6!important;border:2px solid #84998a!important;border-radius:12px!important;box-shadow:4px 4px 0 #c5d0c3!important}.stat strong{color:#e9a91d!important}.stat span{color:#4e625b!important}
+.card{border:2px solid #68766e!important;border-radius:13px!important;box-shadow:4px 5px 0 #b4bdb5!important;background:#fffdf6!important;color:#30473b!important;min-height:150px!important}
+.card p{color:#52665d!important}.card.dark{background:#e0edf0!important;color:#30473b!important;border-color:#6d8990!important}.card.dark p{color:#4f6569!important}.card.yellow{background:#fff0c5!important;border-color:#b99b55!important}.card.yellow p{color:#67562c!important}.card.mint-card{background:#e0f0df!important;border-color:#7ca17c!important}.card.mint-card p{color:#3d6245!important}
+.card .tag{color:#8a9387!important}.card .icon{font-size:31px!important;filter:drop-shadow(1px 2px 0 #fff)!important}
+.road-line .lane{background:#9ca9a1!important}.road-line .lane:after{background:repeating-linear-gradient(90deg,transparent 0 18px,#fff8e8 18px 34px,transparent 34px 50px)!important}.road-line .dot{box-shadow:0 0 0 5px #ef9c7929!important}
+.bar-label{color:#4b6158!important}.bar-track{background:#d3ded8!important}.fill1{background:#e67a5d!important}.fill2{background:#e9b93f!important}.fill3{background:#76bdd9!important}.note{color:#77857d!important}
+.step{background:#fffdf6!important;border-top:4px solid #6ba477!important;border-radius:4px 4px 12px 12px!important;box-shadow:3px 4px 0 #c3cec2!important}.step .n{color:#438357!important}.step p{color:#52665d!important}
+.thanks .stamp{background:#fffdf6;border:3px solid #e4ad2c!important;color:#e4ad2c!important;border-radius:50%!important;box-shadow:5px 5px 0 #c7d1c2!important}
+.controls{background:linear-gradient(0deg,rgba(223,233,236,.98),rgba(223,233,236,.12))!important;padding-top:20px!important}.control-btn{background:#fffdf6!important;color:#3b5b46!important;border:2px solid #829588!important;border-radius:10px!important;box-shadow:3px 3px 0 #bdc8bd!important}.control-btn:hover{background:#ffefc4!important;transform:translateY(-1px)!important}.progress-wrap{background:#bdccc4!important}.progress{background:#e8b53a!important}.counter{color:#405c4c!important;font-weight:800}.hint{color:#6b7e73!important}.dots button{background:#a8b7ad!important}.dots button.active{background:#e5a82d!important}
+.scene-doodle{position:absolute;right:clamp(24px,4.5vw,68px);top:clamp(82px,14vh,150px);width:clamp(105px,16vw,205px);height:auto;z-index:0;pointer-events:none;opacity:.96;filter:drop-shadow(3px 4px 0 rgba(89,109,96,.18));transform:rotate(2deg)}
+.scene-doodle svg{display:block;width:100%;height:auto;overflow:visible}.scene-doodle .line{stroke:#53685d;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;fill:none}.scene-doodle .paper{fill:#fffdf6;stroke:#53685d;stroke-width:3}.scene-doodle .green{fill:#91c99a;stroke:#53685d;stroke-width:3}.scene-doodle .orange{fill:#ffb16e;stroke:#53685d;stroke-width:3}.scene-doodle .bluefill{fill:#a9d9e8;stroke:#53685d;stroke-width:3}.scene-doodle .yellow{fill:#ffd86e;stroke:#53685d;stroke-width:3}.scene-doodle .pink{fill:#f5b8b1;stroke:#53685d;stroke-width:3}
+.slide.cover .scene-doodle{right:7%;top:auto;bottom:13%;width:clamp(155px,24vw,285px);transform:rotate(-2deg)}
+.slide.thanks .scene-doodle{top:10%;right:10%;width:clamp(110px,17vw,190px)}
+@media(max-width:760px){.slide{padding:35px 23px 90px!important}.slide:before{inset:9px;border-radius:15px}.scene-doodle{width:100px;right:22px;top:82px;opacity:.32}.cover .scene-doodle{width:145px;right:6%;bottom:12%;opacity:.8}.cover h1{max-width:100%;padding:18px 14px!important}.cover-bottom{gap:8px}.pill{padding:7px 10px!important}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.card{min-height:132px!important;padding:14px!important}.card p{font-size:13px!important}.card .icon{margin-bottom:9px!important}.slide h2{max-width:100%}.person{font-size:12px!important}.panel{padding:17px!important}.stat-grid{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:1/-1}.steps{gap:10px}.controls{gap:8px}.control-btn{width:39px;height:38px}.counter{min-width:48px}}
+@media(max-width:430px){.scene-doodle{display:none}.cover .scene-doodle{display:block;opacity:.45}.cards{grid-template-columns:1fr}.card{min-height:unset!important}.slide{overflow-y:auto!important}.cover .big-number{font-size:145px!important}.stat-grid{grid-template-columns:1fr}.stat:last-child{grid-column:auto}}
+@media(prefers-reduced-motion:reduce){.slide{transition:none!important}}
+</style>
+
+
+<style id="illustrated-town-theme">
+:root{--navy:#d4dce2;--navy2:#fffdf6;--cream:#fffdf6;--yellow:#f4c343;--coral:#df6845;--mint:#4b9660;--blue:#6ebbd5;--ink:#34483c;--muted:#65766d}
+html,body{background:#d4dce2!important;color:#34483c!important;font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif!important}
+.deck{background-color:#d4dce2!important;background-image:url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%201600%20900%22%3E%3Crect%20width=%221600%22%20height=%22900%22%20fill=%22#d4dce2%22/%3E%3Cpath%20d=%22M0%20180H1600V900H0Z%22%20fill=%22#c9d5dc%22/%3E%3Cg%20fill=%22#b4bec4%22%20opacity=%22.9%22%3E%3Cpath%20d=%22M0%20180V80h95v100h20V40h100v140h28V95h100v85h25V22h110v158h40V70h90v110h30V110h120v70h35V48h105v132h36V85h100v95h40V25h115v155h35V95h95v85h35V56h90v124h35V105h80v75Z%22/%3E%3Cpath%20d=%22M0%20205H1600v35H0Z%22%20fill=%22#aab5bb%22/%3E%3C/g%3E%3Cg%20fill=%22#dce3e7%22%20opacity=%22.8%22%3E%3Cpath%20d=%22M38%20105h18v25H38zm43%200h18v25H81zM160%2068h20v22h-20zm30%200h20v22h-20zm140%2014h18v25h-18zm30%200h18v25h-18zm115-28h18v26h-18zm35%200h18v26h-18zm120%2044h18v24h-18zm32%200h18v24h-18zm150-38h18v24h-18zm35%200h18v24h-18zm105%2027h18v24h-18zm32%200h18v24h-18zm140-37h18v24h-18zm34%200h18v24h-18zm120%2045h18v24h-18zm30%200h18v24h-18z%22/%3E%3C/g%3E%3Cpath%20d=%22M0%20600Q210%20540%20390%20620T760%20620T1130%20610T1600%20590V900H0Z%22%20fill=%22#7fc8df%22/%3E%3Cpath%20d=%22M0%20630Q220%20570%20390%20650T760%20650T1130%20640T1600%20620%22%20fill=%22none%22%20stroke=%22#a8e6f4%22%20stroke-width=%2218%22/%3E%3Cpath%20d=%22M-60%20900L320%20500H920L1310%20900Z%22%20fill=%22#92999b%22%20stroke=%22#f5f1e7%22%20stroke-width=%2210%22/%3E%3Cpath%20d=%22M40%20900L370%20535H870L1215%20900%22%20fill=%22none%22%20stroke=%22#f5c85c%22%20stroke-width=%228%22/%3E%3Cpath%20d=%22M350%20900L485%20555M610%20900L625%20555M880%20900L760%20555%22%20stroke=%22#f3f1e7%22%20stroke-width=%228%22%20stroke-dasharray=%2234%2028%22%20fill=%22none%22/%3E%3Cg%20stroke=%22#53685d%22%20stroke-width=%226%22%20stroke-linejoin=%22round%22%3E%3Cg%20transform=%22translate%2845%20300%29%22%3E%3Cpath%20d=%22M0%20110V35%22%20stroke=%22#795b42%22/%3E%3Ccircle%20cx=%220%22%20cy=%225%22%20r=%2248%22%20fill=%22#5baf7b%22/%3E%3Ccircle%20cx=%22-30%22%20cy=%2226%22%20r=%2229%22%20fill=%22#78c58d%22/%3E%3Ccircle%20cx=%2229%22%20cy=%2227%22%20r=%2231%22%20fill=%22#4b9f6c%22/%3E%3C/g%3E%3Cg%20transform=%22translate%281460%20315%29%22%3E%3Cpath%20d=%22M0%20135V45%22%20stroke=%22#795b42%22/%3E%3Ccircle%20cx=%220%22%20cy=%2220%22%20r=%2258%22%20fill=%22#5baf7b%22/%3E%3Ccircle%20cx=%22-32%22%20cy=%2242%22%20r=%2234%22%20fill=%22#78c58d%22/%3E%3Ccircle%20cx=%2236%22%20cy=%2243%22%20r=%2234%22%20fill=%22#4b9f6c%22/%3E%3C/g%3E%3Cg%20transform=%22translate%281360%20450%29%22%3E%3Crect%20x=%22-28%22%20y=%22-115%22%20width=%2256%22%20height=%22130%22%20rx=%2213%22%20fill=%22#333a3b%22/%3E%3Ccircle%20cy=%22-85%22%20r=%2215%22%20fill=%22#f35d58%22%20stroke=%22#9c4e4c%22/%3E%3Ccircle%20cy=%22-49%22%20r=%2215%22%20fill=%22#ffd45f%22%20stroke=%22#a38b42%22/%3E%3Ccircle%20cy=%22-13%22%20r=%2215%22%20fill=%22#58bb76%22%20stroke=%22#3f8252%22/%3E%3Cpath%20d=%22M0%2015V72%22%20stroke=%22#333a3b%22%20stroke-width=%2212%22/%3E%3C/g%3E%3C/g%3E%3Cg%20stroke=%22#59666a%22%20stroke-width=%225%22%20stroke-linejoin=%22round%22%3E%3Cg%20transform=%22translate%28240%20690%29%22%3E%3Cpath%20d=%22M0%200l35-42h115l42%2042v43H0Z%22%20fill=%22#e6a02e%22/%3E%3Cpath%20d=%22M39%20-35h94l22%2029H18Z%22%20fill=%22#a7d9e8%22/%3E%3Ccircle%20cx=%2239%22%20cy=%2243%22%20r=%2217%22%20fill=%22#fffdf6%22/%3E%3Ccircle%20cx=%22151%22%20cy=%2243%22%20r=%2217%22%20fill=%22#fffdf6%22/%3E%3C/g%3E%3Cg%20transform=%22translate%28980%20720%29%20scale%28.82%29%22%3E%3Cpath%20d=%22M0%200l35-42h115l42%2042v43H0Z%22%20fill=%22#e16d58%22/%3E%3Cpath%20d=%22M39%20-35h94l22%2029H18Z%22%20fill=%22#a7d9e8%22/%3E%3Ccircle%20cx=%2239%22%20cy=%2243%22%20r=%2217%22%20fill=%22#fffdf6%22/%3E%3Ccircle%20cx=%22151%22%20cy=%2243%22%20r=%2217%22%20fill=%22#fffdf6%22/%3E%3C/g%3E%3Cg%20transform=%22translate%28700%20780%29%20scale%28.62%29%22%3E%3Cpath%20d=%22M0%200l35-42h115l42%2042v43H0Z%22%20fill=%22#5ca9c7%22/%3E%3Cpath%20d=%22M39%20-35h94l22%2029H18Z%22%20fill=%22#dff4f6%22/%3E%3Ccircle%20cx=%2239%22%20cy=%2243%22%20r=%2217%22%20fill=%22#fffdf6%22/%3E%3Ccircle%20cx=%22151%22%20cy=%2243%22%20r=%2217%22%20fill=%22#fffdf6%22/%3E%3C/g%3E%3C/g%3E%3Cg%20fill=%22#f4e5bd%22%20stroke=%22#6e7b73%22%20stroke-width=%225%22%3E%3Crect%20x=%221250%22%20y=%22555%22%20width=%22180%22%20height=%2275%22%20rx=%228%22/%3E%3Cpath%20d=%22M1275%20575h130M1275%20596h85%22%20stroke=%22#8d9b91%22%20stroke-width=%227%22/%3E%3C/g%3E%3C/svg%3E")!important;background-position:center center!important;background-size:cover!important;color:#34483c!important;}
+.deck:before{opacity:.1!important;background-image:radial-gradient(#617b75 .8px,transparent .8px)!important;background-size:16px 16px!important}
+.slide{background:transparent!important;padding:clamp(32px,4.3vw,62px) clamp(28px,6.2vw,88px) 92px!important;transition:opacity .32s ease,transform .38s ease,visibility .32s!important;}
+.slide:before{inset:clamp(14px,2vw,25px)!important;border:3px solid #89938e!important;border-radius:10px!important;box-shadow:inset 0 0 0 3px #f9f7ee,6px 7px 0 rgba(87,98,93,.45)!important;background:rgba(255,253,246,.95)!important;}
+.slide:after{content:"";position:absolute;inset:clamp(14px,2vw,25px);border-radius:10px;pointer-events:none;z-index:0;background:linear-gradient(180deg,rgba(255,255,255,.12),transparent 25%);}
+.slide>*:not(.scene-doodle):not(.big-number):not(.road-art){position:relative;z-index:1}
+.kicker{color:#d65e39!important;font-family:Georgia,serif!important;font-weight:900!important;letter-spacing:.06em!important;text-transform:uppercase!important}
+.kicker:before{background:#d65e39!important}
+h1,h2,h3{font-family:Georgia,"Trebuchet MS",serif!important;color:#2f6b43!important;letter-spacing:.005em!important;text-shadow:1px 2px 0 #fff4dc!important}
+h1{font-weight:900!important;text-transform:uppercase!important;line-height:1.02!important}
+h2{font-weight:900!important;line-height:1.08!important}
+.accent{color:#e6ad1e!important}.mint{color:#397b48!important}.coral{color:#d45e48!important}.blue{color:#328bb0!important}
+p{color:#40594b!important}
+.cover .kicker{border:3px solid #78847c!important;border-radius:5px!important;box-shadow:4px 5px 0 #b0b5ae!important;background:#fffdf6!important}
+.cover h1{border:4px solid #6f7c73!important;border-radius:8px!important;box-shadow:7px 8px 0 #b0b7af!important;background:#fffdf6!important;text-align:center!important;max-width:750px!important}
+.cover h1 .accent{color:#e4ad17!important}
+.panel,.card,.person,.stat,.step{border-radius:7px!important;backdrop-filter:none!important;box-shadow:4px 5px 0 rgba(116,129,118,.32)!important}
+.panel{background:#fffdf6!important;border:3px solid #818c83!important}
+.card{border:2px solid #7e8b80!important;background:#fffdf6!important}
+.card.dark{background:#e0edf0!important;border-color:#7e9999!important}.card.yellow{background:#fff0bd!important;border-color:#c4a65d!important}.card.mint-card{background:#e2f0df!important;border-color:#84a287!important}
+.person{background:#fffdf6!important;border:1.5px solid #a5b0a5!important;color:#344c40!important}
+.stat{background:#fffdf6!important;border:2px solid #84998a!important}
+.road-art .disc{border-radius:10px!important;transform:rotate(-5deg)!important}
+.scene-doodle{right:clamp(28px,5vw,76px)!important;top:clamp(88px,13vh,145px)!important;width:clamp(108px,13vw,172px)!important;filter:drop-shadow(3px 4px 0 rgba(89,109,96,.22))!important;}
+.slide.cover .scene-doodle{right:7%!important;top:auto!important;bottom:12%!important;width:clamp(160px,22vw,270px)!important}
+.slide.thanks .scene-doodle{top:10%!important;right:9%!important;width:clamp(120px,15vw,180px)!important}
+.controls{background:linear-gradient(0deg,rgba(212,220,226,.98),rgba(212,220,226,.15))!important}
+.control-btn{background:#fffdf6!important;color:#3b5b46!important;border:2px solid #829588!important;border-radius:7px!important;box-shadow:3px 3px 0 #bdc8bd!important}
+.progress-wrap{background:#b6c3bd!important}.progress{background:#e5ac28!important}.counter{color:#405c4c!important}.hint{color:#596e63!important}
+@media(max-width:760px){.slide{padding:34px 24px 90px!important}.slide:before{inset:9px!important}.scene-doodle{width:94px!important;right:20px!important;top:80px!important;opacity:.45!important}.cover .scene-doodle{width:140px!important;opacity:.85!important}.cover h1{max-width:100%!important}}
+@media(max-width:430px){.deck{background-position:center!important}.scene-doodle{display:none!important}.cover .scene-doodle{display:block!important;opacity:.45!important}}
+</style>
+
+<style id="bug-fixes-and-navigation">
+/* Keep Vietnamese diacritics together: avoid negative tracking and use reliable Unicode fonts. */
+html,body,button,.slide,.slide p,.slide li,.person,.card,.panel{font-family:Arial,"DejaVu Sans","Segoe UI",sans-serif!important;letter-spacing:normal!important;word-spacing:normal!important;font-kerning:normal;font-variant-ligatures:none}
+h1,h2,h3{font-family:Arial,"DejaVu Sans","Segoe UI",sans-serif!important;letter-spacing:normal!important;word-spacing:normal!important}
+.member-list{gap:7px!important;max-height:min(69vh,650px);overflow-y:auto;align-content:start;padding:clamp(12px,1.8vw,22px)!important}
+.member-list .person{padding:7px 10px!important;min-height:35px;font-size:clamp(12px,1.15vw,15px)!important}
+.member-list .num{width:25px;height:25px;flex:none}
+@keyframes enterFromRight{from{opacity:0;transform:translateX(70px) rotate(1deg)}to{opacity:1;transform:translateX(0) rotate(0)}}
+@keyframes enterFromLeft{from{opacity:0;transform:translateX(-70px) rotate(-1deg)}to{opacity:1;transform:translateX(0) rotate(0)}}
+@keyframes enterFromBottom{from{opacity:0;transform:translateY(48px)}to{opacity:1;transform:translateY(0)}}
+@keyframes enterZoom{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+@keyframes enterTilt{from{opacity:0;transform:translateY(20px) rotate(2deg) scale(.96)}to{opacity:1;transform:translateY(0) rotate(0) scale(1)}}
+.slide.active.fx-right{animation:enterFromRight .48s cubic-bezier(.2,.75,.25,1) both}
+.slide.active.fx-left{animation:enterFromLeft .48s cubic-bezier(.2,.75,.25,1) both}
+.slide.active.fx-up{animation:enterFromBottom .5s cubic-bezier(.2,.75,.25,1) both}
+.slide.active.fx-zoom{animation:enterZoom .42s ease-out both}
+.slide.active.fx-tilt{animation:enterTilt .52s ease-out both}
+.return-home{position:absolute;right:clamp(34px,6vw,88px);bottom:clamp(76px,10vh,110px);z-index:5;border:2px solid #849588;border-radius:7px;background:#fffdf6;color:#3b5b46;padding:8px 12px;font-size:13px;font-weight:800;box-shadow:3px 3px 0 #bdc8bd;cursor:pointer}
+.return-home:hover{background:#ffefc4;transform:translateY(-1px)}
+@media(max-width:760px){.member-list{max-height:54vh!important}.member-list .person{font-size:12px!important;padding:6px 8px!important}.return-home{right:25px;bottom:78px}}
+@media(prefers-reduced-motion:reduce){.slide.active.fx-right,.slide.active.fx-left,.slide.active.fx-up,.slide.active.fx-zoom,.slide.active.fx-tilt{animation:none!important}}
+</style>
+</head>
+<body>
+<main class="deck" id="deck" aria-label="Bài thuyết trình an toàn giao thông">
+  <section class="slide cover active" data-title="Mở đầu">
+    <div class="scene-doodle" aria-hidden="true"><svg viewBox="0 0 240 200" role="img" aria-label="Đường phố hoạt hình với đèn giao thông"><path class="bluefill" d="M10 165 Q45 140 80 165 T150 165 T230 165 L230 190 L10 190Z"/><path class="line" d="M8 176 Q50 155 95 176 T230 176"/><rect class="paper" x="22" y="34" width="72" height="98" rx="12"/><circle cx="58" cy="57" r="12" fill="#ef7765" stroke="#53685d" stroke-width="3"/><circle cx="58" cy="83" r="12" fill="#ffd86e" stroke="#53685d" stroke-width="3"/><circle cx="58" cy="109" r="12" fill="#91c99a" stroke="#53685d" stroke-width="3"/><path class="line" d="M58 132V166"/><path class="green" d="M120 120 Q135 96 150 120 L158 159 L112 159Z"/><circle class="paper" cx="135" cy="99" r="19"/><path class="line" d="M127 99h16m-8-8v16"/><path class="orange" d="M170 145l16-30 16 30z"/><path class="line" d="M186 125v9"/><circle cx="186" cy="139" r="2" fill="#53685d"/></svg></div>
+    <div class="big-number">01</div><div class="kicker">Bài thuyết trình · Nhóm 3</div>
+    <h1>AN TOÀN<br><span class="accent">GIAO THÔNG</span></h1>
+    <p class="subtitle">Bắt đầu từ một lựa chọn đúng, mỗi hành trình đều có thể an toàn hơn.</p>
+    <div class="cover-bottom"><span class="pill">🚦 Hiểu luật</span><span class="pill">🪖 Bảo vệ mình</span><span class="pill">🤝 Tôn trọng nhau</span></div>
+    <div class="road-art" aria-hidden="true"><div class="ring"></div><div class="ring"></div><div class="disc">🚦</div></div>
+  </section>
+  <section class="slide" data-title="Thành viên">
+    <div class="scene-doodle" aria-hidden="true"><svg viewBox="0 0 240 200" role="img" aria-label="Nhóm học sinh đứng cạnh biển báo"><path class="line" d="M16 168H224"/><path class="paper" d="M25 18h190v38H25z"/><path class="line" d="M43 30h152M43 43h100"/><circle class="pink" cx="57" cy="89" r="19"/><path class="orange" d="M35 114Q57 101 79 114L86 157H28Z"/><path class="line" d="M42 132l-12 20m37-20 13 20"/><circle class="yellow" cx="118" cy="88" r="18"/><path class="bluefill" d="M96 112Q118 100 140 112L147 157H89Z"/><path class="line" d="M102 132l-11 20m40-20 13 20"/><circle class="green" cx="177" cy="92" r="18"/><path class="pink" d="M155 116Q177 103 199 116L207 157H149Z"/><path class="line" d="M162 133l-11 18m39-18 12 18"/><path class="line" d="M170 28l10-9 10 9"/></svg></div>
+    <div class="kicker">01 / Thành viên</div><div class="two-col">
+      <div><h2>Một nhóm.<br><span class="mint">Một mục tiêu.</span></h2><p>Chúng em cùng tìm hiểu thực trạng giao thông ở địa phương và những việc thiết thực để mỗi người đi đường an toàn hơn.</p><div class="road-line"><span class="dot"></span><div class="lane"></div><span class="dot" style="background:var(--mint);border-color:#c4fff0"></span></div><p class="eyebrow">Cùng học · Cùng nhắc nhở · Cùng thay đổi</p></div>
+      <div class="panel list member-list">
+        <div class="person"><span class="num">01</span>Nguyễn Công Hiếu</div><div class="person"><span class="num">02</span>Nguyễn Đỗ Linh Hương</div><div class="person"><span class="num">03</span>Nguyễn Ngọc Khánh Chi</div><div class="person"><span class="num">04</span>Vi Lê Kiều Diễm</div><div class="person"><span class="num">05</span>Phạm Quỳnh Nga</div><div class="person"><span class="num">06</span>Nguyễn Thu Trang</div><div class="person"><span class="num">07</span>Hán Anh Khánh Chi</div><div class="person"><span class="num">08</span>Nguyễn Ngọc Bảo An</div><div class="person"><span class="num">09</span>Nguyễn Phú Hữu</div><div class="person"><span class="num">10</span>Khuất Hưng Khánh</div><div class="person"><span class="num">11</span>Trần Minh Quân</div>
+      </div>
+    </div>
+  </section>
+  <section class="slide" data-title="Giới thiệu">
+    <div class="scene-doodle" aria-hidden="true"><svg viewBox="0 0 240 200" role="img" aria-label="Học sinh quan sát con đường"><path class="bluefill" d="M0 152Q60 135 120 152T240 152V200H0Z"/><path class="line" d="M8 178Q60 161 118 178T232 178"/><path class="paper" d="M15 24h95v61H15z"/><path class="line" d="M30 40h64M30 53h51M30 67h39"/><circle class="yellow" cx="164" cy="59" r="24"/><path class="line" d="M164 23v-9m0 90v-9m-36-36h-9m90 0h-9m-61-25-7-7m64 64-7-7m0-50 7-7m-64 64-7-7"/><circle class="pink" cx="90" cy="113" r="16"/><path class="green" d="M70 134q20-12 40 0l7 38H63z"/><path class="line" d="M76 149l-13 20m39-20 12 20"/><path class="line" d="M90 99q10-8 18 0"/><path class="orange" d="M144 128h62v32h-62z"/><circle class="paper" cx="157" cy="163" r="10"/><circle class="paper" cx="193" cy="163" r="10"/><path class="line" d="M152 138h45"/></svg></div>
+    <div class="kicker">02 / Đặt vấn đề</div><h2>Đường phố là không gian <span class="accent">chung</span>.</h2>
+    <div class="two-col"><div><p>Đi học, đi làm hay về nhà, chúng ta đều tham gia giao thông. Chỉ một hành động bất cẩn cũng có thể gây nguy hiểm cho bản thân và người xung quanh.</p><p>An toàn giao thông không chỉ là tuân thủ quy định, mà còn là biết quan sát, kiềm chế và nhường nhịn đúng lúc.</p></div><div class="cards"><div class="card yellow"><div class="icon">👀</div><h3>Quan sát</h3><p>Nhìn trước, nhìn sau, chú ý người đi bộ và xe xung quanh.</p></div><div class="card dark"><div class="icon">🧠</div><h3>Chủ động</h3><p>Không chờ sự cố xảy ra mới nghĩ đến an toàn.</p></div><div class="card mint-card"><div class="icon">🫶</div><h3>Trách nhiệm</h3><p>Mỗi người góp phần tạo nên đường phố văn minh.</p></div><div class="card"><div class="icon">🏡</div><h3>Từ địa phương</h3><p>Thay đổi bắt đầu ngay trên con đường quen thuộc.</p></div></div></div>
+  </section>
+  <section class="slide" data-title="Thực trạng">
+    <div class="scene-doodle" aria-hidden="true"><svg viewBox="0 0 240 200" role="img" aria-label="Con đường đông xe và biển cảnh báo"><path class="line" d="M10 174H230"/><path class="bluefill" d="M5 166L63 113H177L235 166Z"/><path class="line" d="M64 164l22-36m28 36 10-36m25 36 1-36"/><path class="orange" d="M22 28l26-14 26 14v44L48 86 22 72Z"/><path class="line" d="M48 31v25m0 13v1"/><path class="paper" d="M105 48h92v47h-92z"/><path class="line" d="M120 63h62m-62 14h45"/><path class="yellow" d="M139 110l20-28 20 28z"/><path class="line" d="M159 92v9m0 5v1"/><path class="pink" d="M27 131h51v29H27z"/><circle class="paper" cx="39" cy="163" r="8"/><circle class="paper" cx="67" cy="163" r="8"/></svg></div>
+    <div class="kicker">03 / Thực trạng</div><h2>Những điều dễ gặp trên đường.</h2>
+    <div class="cards"><div class="card"><div class="tag">01</div><div class="icon">🪖</div><h3>Quên mũ bảo hiểm</h3><p>Một số người đi xe máy hoặc xe điện chưa đội mũ, hoặc đội nhưng cài quai không đúng cách.</p></div><div class="card yellow"><div class="tag">02</div><div class="icon">📱</div><h3>Mất tập trung</h3><p>Vừa di chuyển vừa nhìn điện thoại, đùa nghịch hoặc nói chuyện thiếu chú ý.</p></div><div class="card dark"><div class="tag">03</div><div class="icon">↔️</div><h3>Đi sai phần đường</h3><p>Lấn làn, vượt ẩu hoặc chuyển hướng mà không quan sát và báo hiệu.</p></div><div class="card mint-card"><div class="tag">04</div><div class="icon">🚸</div><h3>Khu vực đông người</h3><p>Trước cổng trường, chợ và ngã tư dễ ùn tắc khi mọi người dừng đỗ tùy tiện.</p></div></div>
+    <p class="note">Các ví dụ trên là những tình huống cần chú ý, không phải số liệu thống kê riêng của địa phương.</p>
+  </section>
+  <section class="slide" data-title="Nội dung trọng tâm">
+    <div class="scene-doodle" aria-hidden="true"><svg viewBox="0 0 240 200" role="img" aria-label="Mũ bảo hiểm và đèn tín hiệu"><path class="paper" d="M18 145Q21 88 75 81Q124 83 131 145Z"/><path class="yellow" d="M26 133Q31 96 74 94Q107 95 119 133Z"/><path class="line" d="M75 95v35m-40 4h79"/><path class="line" d="M45 145l-6 20m61-20 9 20"/><rect class="paper" x="158" y="22" width="54" height="112" rx="12"/><circle cx="185" cy="47" r="12" fill="#ef7765" stroke="#53685d" stroke-width="3"/><circle cx="185" cy="78" r="12" fill="#ffd86e" stroke="#53685d" stroke-width="3"/><circle cx="185" cy="109" r="12" fill="#91c99a" stroke="#53685d" stroke-width="3"/><path class="line" d="M185 134v35M15 171H226"/><path class="green" d="M133 158l11-20 11 20z"/><path class="line" d="M144 145v7"/></svg></div>
+    <div class="kicker">04 / Điều cần nhớ</div><h2>Bốn nguyên tắc <span class="mint">không mặc cả</span>.</h2>
+    <div class="cards"><div class="card yellow"><div class="icon">🪖</div><h3>Đội mũ đúng cách</h3><p>Chọn mũ bảo hiểm phù hợp, cài quai chắc chắn khi đi xe máy hoặc xe máy điện.</p></div><div class="card dark"><div class="icon">🚦</div><h3>Tuân thủ tín hiệu</h3><p>Chấp hành đèn giao thông, biển báo và vạch kẻ đường; dừng đúng vị trí.</p></div><div class="card mint-card"><div class="icon">🛣️</div><h3>Đi đúng phần đường</h3><p>Đi đúng làn, giữ khoảng cách, giảm tốc độ khi qua giao lộ và nơi đông người.</p></div><div class="card"><div class="icon">📵</div><h3>Không xao nhãng</h3><p>Không dùng điện thoại khi điều khiển phương tiện, không nô đùa dưới lòng đường.</p></div></div>
+  </section>
+  <section class="slide" data-title="Nguy cơ tai nạn">
+    <div class="scene-doodle" aria-hidden="true"><svg viewBox="0 0 240 200" role="img" aria-label="Biển cảnh báo an toàn giao thông"><path class="yellow" d="M120 14L222 174H18Z"/><path class="line" d="M120 63v47m0 19v2"/><path class="line" d="M52 177h136"/><path class="bluefill" d="M27 145h53v24H27z"/><circle class="paper" cx="39" cy="171" r="8"/><circle class="paper" cx="68" cy="171" r="8"/><path class="pink" d="M160 143h48v27h-48z"/><circle class="paper" cx="171" cy="172" r="8"/><circle class="paper" cx="198" cy="172" r="8"/><path class="line" d="M12 28l12 10m-5-22 5 22 21-2"/></svg></div>
+    <div class="kicker">05 / Nhận diện rủi ro</div><h2>Tai nạn thường bắt đầu từ <span class="coral">một phút chủ quan</span>.</h2>
+    <div class="risk-layout"><div class="bars"><div><div class="bar-label"><span>Thiếu quan sát</span><strong class="coral">Rủi ro cao</strong></div><div class="bar-track"><div class="bar-fill fill1"></div></div></div><div><div class="bar-label"><span>Không chấp hành tín hiệu</span><strong class="accent">Rủi ro cao</strong></div><div class="bar-track"><div class="bar-fill fill2"></div></div></div><div><div class="bar-label"><span>Đi nhanh, bám sát xe trước</span><strong class="blue">Cần tránh</strong></div><div class="bar-track"><div class="bar-fill fill3"></div></div></div><p class="note">Minh họa mức độ cần lưu ý, không phải tỷ lệ tai nạn hay kết quả khảo sát.</p></div><div class="panel"><div class="eyebrow">Hậu quả có thể xảy ra</div><h3 style="font-size:clamp(24px,3vw,34px);margin-top:14px">Một hành vi nguy hiểm có thể ảnh hưởng đến nhiều người.</h3><p>Va chạm gây thương tích, thiệt hại tài sản, ùn tắc giao thông và để lại nỗi lo cho gia đình.</p><div class="road-line"><span class="dot"></span><div class="lane"></div><span style="font-size:25px">⚠️</span></div><p style="font-size:14px;margin-bottom:0">Đi chậm hơn vài giây vẫn tốt hơn đánh cược với sự an toàn.</p></div></div>
+  </section>
+  <section class="slide" data-title="Vai trò của mọi người">
+    <div class="scene-doodle" aria-hidden="true"><svg viewBox="0 0 240 200" role="img" aria-label="Gia đình và nhà trường cùng giữ an toàn"><path class="green" d="M18 83L75 35l57 48v81H18Z"/><path class="paper" d="M58 112h34v52H58z"/><path class="paper" d="M35 91h22v22H35zM91 91h22v22H91z"/><path class="line" d="M15 166h127"/><circle class="pink" cx="164" cy="76" r="17"/><path class="orange" d="M144 98q20-12 40 0l7 43h-54z"/><path class="line" d="M151 116l-12 22m34-22 14 22"/><circle class="yellow" cx="205" cy="91" r="15"/><path class="bluefill" d="M188 110q17-10 34 0l5 32h-44z"/><path class="line" d="M195 123l-9 18m28-18 9 18"/><path class="line" d="M151 45q12-15 25 0m-25 0 12 10 13-10"/></svg></div>
+    <div class="kicker">06 / Cùng chịu trách nhiệm</div><h2>An toàn giao thông không phải việc của riêng ai.</h2>
+    <div class="cards"><div class="card yellow"><div class="icon">🏛️</div><h3>Cơ quan chức năng</h3><p>Tổ chức giao thông hợp lý, kiểm tra và tuyên truyền, xử lý hành vi vi phạm theo quy định.</p></div><div class="card dark"><div class="icon">🏫</div><h3>Nhà trường</h3><p>Giáo dục kỹ năng, nhắc nhở học sinh và phối hợp bảo đảm an toàn trước cổng trường.</p></div><div class="card mint-card"><div class="icon">👨‍👩‍👧</div><h3>Gia đình</h3><p>Làm gương khi tham gia giao thông, chuẩn bị mũ bảo hiểm và hướng dẫn con đi đường an toàn.</p></div><div class="card"><div class="icon">🤝</div><h3>Mỗi người dân</h3><p>Chấp hành luật, nhường nhịn, không cổ vũ hành vi nguy hiểm và nhắc nhau đúng cách.</p></div></div>
+  </section>
+  <section class="slide" data-title="Hành động an toàn">
+    <div class="scene-doodle" aria-hidden="true"><svg viewBox="0 0 240 200" role="img" aria-label="Học sinh đội mũ bảo hiểm đi đúng luật"><circle class="yellow" cx="119" cy="46" r="24"/><path class="line" d="M119 13v-7m-33 40h-8m82 0h8m-72-23-6-6m58 58 6 6"/><circle class="pink" cx="104" cy="87" r="17"/><path class="green" d="M84 109q20-12 40 0l8 44H76z"/><path class="line" d="M89 127l-15 20m44-20 15 20"/><path class="yellow" d="M84 81q5-21 22-20 18 1 20 20l-5 5H89Z"/><path class="line" d="M95 78h27"/><path class="line" d="M20 164h200"/><path class="bluefill" d="M150 132h52v26h-52z"/><circle class="paper" cx="161" cy="160" r="9"/><circle class="paper" cx="191" cy="160" r="9"/><path class="line" d="M159 139h32"/></svg></div>
+    <div class="kicker">07 / Biến kiến thức thành hành động</div><h2>Trước khi đi, hãy tự kiểm tra.</h2>
+    <div class="two-col"><div class="panel"><div class="eyebrow">Checklist mỗi chuyến đi</div><div class="list" style="margin-top:18px"><div class="person"><span class="num">✓</span>Đội mũ bảo hiểm và cài quai đúng cách.</div><div class="person"><span class="num">✓</span>Kiểm tra phương tiện, quan sát trước khi đi.</div><div class="person"><span class="num">✓</span>Tuân thủ đèn tín hiệu, biển báo và vạch đường.</div><div class="person"><span class="num">✓</span>Không dùng điện thoại khi điều khiển xe.</div><div class="person"><span class="num">✓</span>Giảm tốc độ, nhường đường khi cần thiết.</div></div></div><div><div class="eyebrow">Thói quen nhỏ · Ý nghĩa lớn</div><h3 style="font-size:clamp(26px,3.5vw,42px);margin-top:16px">Đi đúng luật là bảo vệ chính mình và những người mình chưa từng gặp.</h3><p>Hãy bắt đầu bằng hành động của bản thân, sau đó lan tỏa bằng cách nhắc nhở nhẹ nhàng và làm gương cho bạn bè.</p><div class="steps"><div class="step"><div class="n">BƯỚC 01</div><h3>Nhớ luật</h3><p>Hiểu tín hiệu và quy tắc.</p></div><div class="step"><div class="n">BƯỚC 02</div><h3>Làm đúng</h3><p>Giữ thói quen mỗi ngày.</p></div><div class="step"><div class="n">BƯỚC 03</div><h3>Nhắc nhau</h3><p>Góp ý văn minh.</p></div><div class="step"><div class="n">BƯỚC 04</div><h3>Lan tỏa</h3><p>Cùng xây dựng nếp tốt.</p></div></div></div></div>
+  </section>
+  <section class="slide" data-title="Kết luận">
+    <div class="scene-doodle" aria-hidden="true"><svg viewBox="0 0 240 200" role="img" aria-label="Con đường bình yên trong khu phố"><path class="bluefill" d="M0 158Q45 135 87 158T170 158T240 158V200H0Z"/><path class="line" d="M0 177Q45 154 87 177T170 177T240 177"/><path class="green" d="M16 83L47 54l31 29v64H16Z"/><path class="paper" d="M35 112h24v35H35z"/><path class="line" d="M8 147h85"/><path class="orange" d="M128 119h65v31h-65z"/><circle class="paper" cx="143" cy="152" r="10"/><circle class="paper" cx="178" cy="152" r="10"/><path class="line" d="M137 128h45"/><path class="green" d="M195 89q-2-24 18-24 21 0 18 24l-18 21Z"/><path class="line" d="M213 108v44"/><path class="yellow" d="M93 63l11-11 11 11v18H93Z"/><path class="line" d="M104 81v15"/></svg></div>
+    <div class="kicker">08 / Thông điệp</div><h2>Đường an toàn bắt đầu từ <span class="accent">mình</span>.</h2><p>An toàn giao thông không nằm ở khẩu hiệu treo trên tường, mà thể hiện qua từng lần dừng đèn đỏ, từng chiếc mũ được cài quai và từng quyết định nhường đường.</p><div class="stat-grid"><div class="stat"><strong>01</strong><span>Luôn đặt an toàn lên trước sự vội vàng.</span></div><div class="stat"><strong>02</strong><span>Tôn trọng luật và những người cùng tham gia giao thông.</span></div><div class="stat"><strong>03</strong><span>Bắt đầu từ bản thân, lan tỏa đến cộng đồng.</span></div></div><div class="road-line"><span class="dot" style="background:var(--mint);border-color:#c4fff0"></span><div class="lane"></div><span style="font-size:22px">🏡</span></div>
+  </section>
+  <section class="slide thanks" data-title="Cảm ơn">
+    <div class="scene-doodle" aria-hidden="true"><svg viewBox="0 0 240 200" role="img" aria-label="Học sinh cảm ơn và trái tim"><path class="pink" d="M120 55C87 20 48 55 68 87l52 54 52-54c20-32-19-67-52-32Z"/><path class="line" d="M87 79q13-13 26 0m14 0q13-13 26 0"/><path class="line" d="M104 101q16 14 32 0"/><path class="yellow" d="M24 46l5 12 13 1-10 8 3 13-11-7-11 7 3-13-10-8 13-1Z"/><path class="green" d="M186 120q-2-26 20-26 20 0 18 26l-18 20Z"/><path class="line" d="M206 140v33"/><path class="line" d="M22 175h196"/><path class="bluefill" d="M80 152q18-15 36 0l5 22H75Z"/><path class="orange" d="M124 152q18-15 36 0l5 22h-46Z"/></svg></div>
+    <div class="stamp">✓</div><div class="kicker" style="justify-content:center">Nhóm 3 · Xin cảm ơn</div><h2><span class="accent">CẢM ƠN</span><br>ĐÃ LẮNG NGHE!</h2><p>Mỗi người đi đúng luật, mỗi con đường thêm bình yên.</p><div class="cover-bottom" style="justify-content:center"><span class="pill">🚦 An toàn là lựa chọn</span><span class="pill">💛 Hãy cùng thực hiện</span></div>
+    <button class="return-home" id="returnHome" type="button">↶ Về trang đầu</button>
+  </section>
+  <nav class="controls" aria-label="Điều khiển trình chiếu"><button class="control-btn" id="prev" aria-label="Trang trước" title="Trang trước (←)">‹</button><div class="progress-wrap" aria-label="Tiến trình"><div class="progress" id="progress"></div></div><div class="dots" id="dots" aria-label="Chọn trang"></div><span class="counter" id="counter">01 / 10</span><span class="hint">← → chuyển trang · F toàn màn hình</span><button class="control-btn" id="next" aria-label="Trang tiếp" title="Trang tiếp (→)">›</button><button class="control-btn" id="full" aria-label="Toàn màn hình" title="Toàn màn hình (F)">⛶</button></nav>
+</main>
+<script>
+(() => {
+  const slides = [...document.querySelectorAll('.slide')];
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  const counter = document.getElementById('counter');
+  const progress = document.getElementById('progress');
+  const dots = document.getElementById('dots');
+  const full = document.getElementById('full');
+  let current = 0;
+  slides.forEach((slide, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button'; dot.title = `Đến trang ${i + 1}: ${slide.dataset.title}`;
+    dot.setAttribute('aria-label', dot.title);
+    dot.addEventListener('click', () => show(i));
+    dots.appendChild(dot);
+  });
+  const dotButtons = [...dots.children];
+  const effects = ['fx-right', 'fx-up', 'fx-zoom', 'fx-left', 'fx-tilt'];
+  function show(index) {
+    const target = Math.max(0, Math.min(slides.length - 1, index));
+    if (target === current && slides[current].classList.contains('active')) return;
+    slides[current].classList.remove('active', 'exit-left', ...effects);
+    current = target;
+    const activeSlide = slides[current];
+    activeSlide.classList.remove(...effects);
+    activeSlide.classList.add('active', effects[current % effects.length]);
+    void activeSlide.offsetWidth;
+    counter.textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+    progress.style.width = `${((current + 1) / slides.length) * 100}%`;
+    prev.disabled = current === 0; next.disabled = current === slides.length - 1;
+    dotButtons.forEach((d, i) => { d.classList.toggle('active', i === current); if (i === current) d.setAttribute('aria-current', 'step'); else d.removeAttribute('aria-current'); });
+    document.title = `${slides[current].dataset.title} | An toàn giao thông`;
+  }
+  prev.addEventListener('click', () => show(current - 1));
+  next.addEventListener('click', () => show(current + 1));
+  document.getElementById('returnHome').addEventListener('click', () => show(0));
+  full.addEventListener('click', async () => {
+    try { if (!document.fullscreenElement) await document.getElementById('deck').requestFullscreen(); else await document.exitFullscreen(); } catch (_) {}
+  });
+  document.addEventListener('keydown', e => {
+    if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); show(current + 1); }
+    if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') show(0);
+    if (e.key === 'End') show(slides.length - 1);
+    if (e.key.toLowerCase() === 'f') full.click();
+  });
+  let startX = null;
+  document.getElementById('deck').addEventListener('touchstart', e => { startX = e.changedTouches[0].clientX; }, {passive:true});
+  document.getElementById('deck').addEventListener('touchend', e => { if (startX === null) return; const dx = e.changedTouches[0].clientX - startX; if (Math.abs(dx) > 55) show(current + (dx < 0 ? 1 : -1)); startX = null; }, {passive:true});
+  show(0);
+})();
+</script>
+</body>
+</html>
