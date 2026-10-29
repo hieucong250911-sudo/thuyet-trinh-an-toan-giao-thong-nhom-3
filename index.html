@@ -1,341 +1,134 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1728">
 <title>An toàn giao thông ở địa phương em</title>
-
 <style>
-:root {
-  --bg: #10111b;
-  --pink: #f7a8cb;
-  --panel: #202131;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  min-height: 100vh;
-  background:
-    radial-gradient(ellipse at top, #34223d 0%, transparent 60%),
-    var(--bg);
-  color: white;
-  font-family: Arial, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.app {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  padding: 16px;
-}
-
-.heading {
-  text-align: center;
-  color: var(--pink);
-  letter-spacing: 3px;
-  font-size: clamp(13px, 2vw, 19px);
-  animation: appear 1s ease both;
-}
-
-.heading small {
-  display: block;
-  color: #c7c2d6;
-  font-size: 11px;
-  letter-spacing: 2px;
-  margin-top: 7px;
-}
-
-.stage {
-  position: relative;
-  width: min(94vw, 1200px);
-  aspect-ratio: 16 / 9;
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow:
-    0 0 0 1px #ffffff20,
-    0 15px 70px #0008,
-    0 0 45px #ed80bd22;
-  perspective: 1600px;
-}
-
-#slide {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: none;
-  background: white;
-  opacity: 1;
-  transform: translateX(0) rotateY(0);
-  transition:
-    opacity .35s ease,
-    transform .55s cubic-bezier(.2,.75,.2,1);
-}
-
-#slide.out-next {
-  opacity: 0;
-  transform: translateX(-35px) rotateY(-4deg) scale(.98);
-}
-
-#slide.out-prev {
-  opacity: 0;
-  transform: translateX(35px) rotateY(4deg) scale(.98);
-}
-
-.glow {
-  position: absolute;
-  pointer-events: none;
-  inset: 0;
-  border: 1px solid #ffffff25;
-  border-radius: inherit;
-}
-
-.sparkle {
-  position: fixed;
-  pointer-events: none;
-  color: #ffd5e7;
-  font-size: 22px;
-  opacity: .55;
-  animation: drift 5s ease-in-out infinite;
-}
-
-.s1 { top: 12%; left: 5%; }
-.s2 { top: 22%; right: 6%; animation-delay: -2s; }
-.s3 { bottom: 12%; left: 8%; animation-delay: -3s; }
-
-@keyframes drift {
-  0%, 100% {
-    transform: translateY(0) rotate(-8deg);
-  }
-  50% {
-    transform: translateY(-13px) rotate(8deg);
-  }
-}
-
-@keyframes appear {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-button {
-  font: inherit;
-  font-size: 13px;
-  color: white;
-  background: var(--panel);
-  border: 1px solid #ffffff24;
-  border-radius: 28px;
-  padding: 12px 17px;
-  cursor: pointer;
-  transition:
-    background .25s ease,
-    transform .25s ease,
-    border-color .25s ease;
-}
-
-button:hover {
-  background: #613653;
-  border-color: var(--pink);
-  transform: translateY(-2px);
-}
-
-#count {
-  color: var(--pink);
-  min-width: 65px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.progress {
-  width: min(94vw, 1200px);
-  height: 3px;
-  background: #ffffff18;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-#bar {
-  height: 100%;
-  width: 10%;
-  background: linear-gradient(90deg, #d76ca6, #ffd5e7);
-  transition: width .45s ease;
-}
-
-.hint {
-  text-align: center;
-  color: #aaa7bd;
-  font-size: 11px;
-  line-height: 1.8;
-}
-
-@media (max-width: 600px) {
-  .app { padding: 8px; gap: 12px; }
-  .stage { width: 98vw; border-radius: 5px; }
-  button { padding: 10px 12px; font-size: 12px; }
-  .heading { letter-spacing: 1.5px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-  }
-}
+:root{--navy:#0b1728;--navy2:#122641;--cream:#f7f3e9;--yellow:#ffd166;--coral:#ff6b6b;--mint:#63d6b4;--blue:#73b7ff;--ink:#17243a;--muted:#64748b}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:var(--navy);color:white}
+button{font:inherit}.deck{position:relative;width:100%;height:100%;isolation:isolate;background:radial-gradient(circle at 80% 10%,#203b5d 0,transparent 34%),radial-gradient(circle at 8% 88%,#173452 0,transparent 30%),var(--navy)}
+.slide{position:absolute;inset:0;padding:clamp(24px,5vw,72px) clamp(24px,7vw,100px) 90px;display:flex;flex-direction:column;justify-content:center;opacity:0;visibility:hidden;transform:translateX(38px) scale(.99);transition:opacity .42s ease,transform .52s cubic-bezier(.2,.75,.25,1),visibility .42s;overflow:auto}
+.slide.active{opacity:1;visibility:visible;transform:translateX(0) scale(1);z-index:2}.slide.exit-left{transform:translateX(-38px) scale(.99)}
+.kicker{display:flex;align-items:center;gap:10px;text-transform:uppercase;letter-spacing:.16em;font-size:clamp(10px,1.2vw,13px);font-weight:800;color:var(--mint);margin-bottom:18px}.kicker:before{content:"";width:28px;height:3px;background:var(--mint);border-radius:8px}
+h1,h2,h3,p{margin-top:0}h1{font-size:clamp(44px,8.3vw,108px);line-height:.94;letter-spacing:-.065em;margin-bottom:22px;max-width:950px}h2{font-size:clamp(32px,5vw,64px);line-height:1.02;letter-spacing:-.045em;margin-bottom:24px}h3{font-size:clamp(18px,2.2vw,25px);margin-bottom:9px;letter-spacing:-.02em}p{line-height:1.65;color:#d0d9e6;font-size:clamp(15px,1.55vw,19px);max-width:780px}.accent{color:var(--yellow)}.mint{color:var(--mint)}.coral{color:var(--coral)}.blue{color:var(--blue)}.subtitle{font-size:clamp(17px,2vw,24px);max-width:650px;color:#c5d2e2}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.13em;font-weight:800;color:#9bb1c9}
+.cover{justify-content:center}.cover .big-number{position:absolute;right:7%;top:13%;font-size:clamp(150px,28vw,360px);font-weight:950;line-height:1;color:rgba(255,255,255,.035);letter-spacing:-.1em;pointer-events:none}.cover h1{position:relative;z-index:1}.cover .subtitle{position:relative;z-index:1}.cover-bottom{display:flex;gap:12px;align-items:center;margin-top:38px;color:#aabbd0;font-size:13px;font-weight:700;letter-spacing:.06em}.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid #3c536f;border-radius:99px;padding:9px 14px;color:#e7eef8;background:#14263d}
+.road-art{position:absolute;right:6%;bottom:9%;width:min(30vw,330px);height:min(30vw,330px);min-width:170px;min-height:170px;opacity:.95}.road-art .ring{position:absolute;inset:0;border:1px solid #3a536e;border-radius:50%}.road-art .ring:nth-child(2){inset:15%;border-style:dashed}.road-art .disc{position:absolute;inset:29%;border-radius:50%;background:var(--yellow);display:grid;place-items:center;color:var(--navy);font-size:clamp(35px,7vw,70px);box-shadow:0 0 70px #ffd16635}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,5vw,72px);align-items:center}.panel{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:clamp(20px,3vw,34px);backdrop-filter:blur(8px)}.list{display:grid;gap:12px}.person{display:flex;align-items:center;gap:13px;padding:12px 14px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);border-radius:14px;font-weight:650;color:#eaf0f8;font-size:clamp(13px,1.4vw,16px)}.num{flex:none;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:#203b59;color:var(--yellow);font-size:12px;font-weight:900}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}.stat{border-radius:18px;padding:20px;background:#152a43;border:1px solid #29425e}.stat strong{display:block;font-size:clamp(26px,4vw,46px);letter-spacing:-.05em;color:var(--yellow);margin-bottom:8px}.stat span{font-size:13px;line-height:1.4;color:#c1cfdf}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{position:relative;min-height:160px;padding:24px;border-radius:22px;background:var(--cream);color:var(--ink);overflow:hidden}.card p{color:#526074;font-size:15px;margin-bottom:0}.card .icon{font-size:29px;margin-bottom:17px}.card .tag{position:absolute;right:18px;top:17px;font-size:11px;font-weight:900;letter-spacing:.12em;color:#7b8798}.card.dark{background:#18304b;color:white;border:1px solid #34516f}.card.dark p{color:#c8d5e4}.card.yellow{background:var(--yellow)}.card.yellow p{color:#5c4b22}.card.mint-card{background:var(--mint)}.card.mint-card p{color:#164b42}
+.road-line{display:flex;align-items:center;gap:10px;margin:25px 0 12px}.road-line .lane{height:5px;flex:1;background:#324a65;border-radius:8px;position:relative}.road-line .lane:after{content:"";position:absolute;inset:1px 0;background:repeating-linear-gradient(90deg,transparent 0 18px,#b8c7d8 18px 34px,transparent 34px 50px)}.road-line .dot{width:15px;height:15px;background:var(--coral);border:3px solid #ffd1d1;border-radius:50%;box-shadow:0 0 0 6px #ff6b6b22}
+.risk-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}.bars{display:grid;gap:20px}.bar-label{display:flex;justify-content:space-between;gap:12px;font-size:14px;color:#dce6f2;margin-bottom:8px}.bar-track{height:12px;border-radius:99px;background:#243b56;overflow:hidden}.bar-fill{height:100%;border-radius:99px;transform:scaleX(0);transform-origin:left;transition:transform 1s .2s}.active .bar-fill{transform:scaleX(1)}.fill1{width:86%;background:var(--coral)}.fill2{width:68%;background:var(--yellow)}.fill3{width:52%;background:var(--blue)}.note{font-size:12px;color:#9db0c5;line-height:1.5;margin-top:14px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}.step{padding:20px 16px;border-top:3px solid var(--mint);background:rgba(255,255,255,.05);border-radius:0 0 16px 16px}.step .n{font-size:12px;color:var(--mint);font-weight:900;letter-spacing:.12em;margin-bottom:14px}.step p{font-size:14px;margin:0;color:#c5d2e2}
+.thanks{align-items:center;text-align:center}.thanks h2{font-size:clamp(55px,11vw,130px);margin-bottom:16px}.thanks p{margin-left:auto;margin-right:auto}.thanks .stamp{width:104px;height:104px;border:2px solid var(--yellow);border-radius:32px;transform:rotate(-8deg);display:grid;place-items:center;color:var(--yellow);font-size:48px;margin-bottom:28px;box-shadow:8px 8px 0 #ffd16620}
+.controls{position:absolute;z-index:10;left:0;right:0;bottom:0;display:flex;align-items:center;gap:14px;padding:16px clamp(18px,4vw,54px);background:linear-gradient(0deg,rgba(5,13,24,.95),rgba(5,13,24,.2));}.control-btn{border:1px solid #41556e;color:#f1f5fa;background:#14263c;border-radius:12px;width:44px;height:42px;cursor:pointer;transition:.2s;font-size:18px}.control-btn:hover{background:#264360;transform:translateY(-2px)}.control-btn:disabled{opacity:.3;cursor:not-allowed;transform:none}.progress-wrap{height:4px;background:#2b4058;border-radius:9px;flex:1;overflow:hidden}.progress{height:100%;width:10%;background:var(--yellow);border-radius:9px;transition:width .35s}.counter{font-size:12px;color:#c1cfdf;min-width:52px;text-align:center;font-variant-numeric:tabular-nums}.hint{font-size:11px;color:#7f94ad;white-space:nowrap}.dots{display:flex;gap:5px}.dots button{border:0;padding:0;width:6px;height:6px;border-radius:99px;background:#52667e;cursor:pointer}.dots button.active{width:18px;background:var(--yellow)}
+@media(max-width:760px){.slide{padding:26px 22px 92px;justify-content:flex-start;padding-top:42px}.slide.cover,.slide.thanks{justify-content:center}.two-col,.risk-layout{grid-template-columns:1fr}.two-col{gap:18px}.road-art{right:6%;bottom:13%;width:145px;height:145px;min-width:145px;min-height:145px;opacity:.5}.cover .big-number{top:14%;right:2%}.cards{gap:10px}.card{padding:17px;min-height:145px}.stat-grid{gap:8px}.stat{padding:13px}.steps{grid-template-columns:repeat(2,1fr)}.hint{display:none}.person{padding:8px 10px}.num{width:26px;height:26px}.controls{gap:9px}.dots{display:none}}
+@media(max-height:650px) and (min-width:761px){.slide{padding-top:24px}.panel{padding:20px}.person{padding:8px 12px}.card{min-height:125px;padding:18px}.card .icon{margin-bottom:8px}.stat-grid{margin-top:12px}.road-art{width:210px;height:210px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
-
 <body>
-<main class="app">
-
-  <div class="sparkle s1">✧</div>
-  <div class="sparkle s2">✦</div>
-  <div class="sparkle s3">✧</div>
-
-  <header class="heading">
-    AN TOÀN GIAO THÔNG
-    <small>BÀI THUYẾT TRÌNH · 2026</small>
-  </header>
-
-  <section class="stage" id="stage">
-    <iframe
-      id="slide"
-      src="presentation.pdf#page=1&toolbar=0&navpanes=0&view=Fit"
-      title="Bài thuyết trình an toàn giao thông">
-    </iframe>
-    <div class="glow"></div>
+<main class="deck" id="deck" aria-label="Bài thuyết trình an toàn giao thông">
+  <section class="slide cover active" data-title="Mở đầu">
+    <div class="big-number">01</div><div class="kicker">Bài thuyết trình · Nhóm 3</div>
+    <h1>AN TOÀN<br><span class="accent">GIAO THÔNG</span></h1>
+    <p class="subtitle">Bắt đầu từ một lựa chọn đúng, mỗi hành trình đều có thể an toàn hơn.</p>
+    <div class="cover-bottom"><span class="pill">🚦 Hiểu luật</span><span class="pill">🪖 Bảo vệ mình</span><span class="pill">🤝 Tôn trọng nhau</span></div>
+    <div class="road-art" aria-hidden="true"><div class="ring"></div><div class="ring"></div><div class="disc">🚦</div></div>
   </section>
-
-  <div class="progress">
-    <div id="bar"></div>
-  </div>
-
-  <nav class="controls">
-    <button id="prev">❮ Trang trước</button>
-    <span id="count">01 / 10</span>
-    <button id="next">Trang tiếp ❯</button>
-    <button id="fullscreen">⛶ Toàn màn hình</button>
-  </nav>
-
-  <p class="hint">
-    ← → Chuyển trang &nbsp; · &nbsp;
-    F Toàn màn hình &nbsp; · &nbsp;
-    ESC Thoát trình chiếu
-  </p>
-
+  <section class="slide" data-title="Thành viên">
+    <div class="kicker">01 / Thành viên</div><div class="two-col">
+      <div><h2>Một nhóm.<br><span class="mint">Một mục tiêu.</span></h2><p>Chúng em cùng tìm hiểu thực trạng giao thông ở địa phương và những việc thiết thực để mỗi người đi đường an toàn hơn.</p><div class="road-line"><span class="dot"></span><div class="lane"></div><span class="dot" style="background:var(--mint);border-color:#c4fff0"></span></div><p class="eyebrow">Cùng học · Cùng nhắc nhở · Cùng thay đổi</p></div>
+      <div class="panel list">
+        <div class="person"><span class="num">01</span>Nguyễn Công Hiếu</div><div class="person"><span class="num">02</span>Nguyễn Đỗ Linh Hương</div><div class="person"><span class="num">03</span>Nguyễn Ngọc Khánh Chi</div><div class="person"><span class="num">04</span>Vi Lê Kiều Diễm</div><div class="person"><span class="num">05</span>Phạm Quỳnh Nga</div><div class="person"><span class="num">06</span>Nguyễn Thu Trang</div><div class="person"><span class="num">07</span>Hán Anh Khánh Chi</div><div class="person"><span class="num">08</span>Nguyễn Ngọc Bảo An</div><div class="person"><span class="num">09</span>Nguyễn Phú Hữu</div><div class="person"><span class="num">10</span>Khuất Hưng Khánh</div>
+      </div>
+    </div>
+  </section>
+  <section class="slide" data-title="Giới thiệu">
+    <div class="kicker">02 / Đặt vấn đề</div><h2>Đường phố là không gian <span class="accent">chung</span>.</h2>
+    <div class="two-col"><div><p>Đi học, đi làm hay về nhà, chúng ta đều tham gia giao thông. Chỉ một hành động bất cẩn cũng có thể gây nguy hiểm cho bản thân và người xung quanh.</p><p>An toàn giao thông không chỉ là tuân thủ quy định, mà còn là biết quan sát, kiềm chế và nhường nhịn đúng lúc.</p></div><div class="cards"><div class="card yellow"><div class="icon">👀</div><h3>Quan sát</h3><p>Nhìn trước, nhìn sau, chú ý người đi bộ và xe xung quanh.</p></div><div class="card dark"><div class="icon">🧠</div><h3>Chủ động</h3><p>Không chờ sự cố xảy ra mới nghĩ đến an toàn.</p></div><div class="card mint-card"><div class="icon">🫶</div><h3>Trách nhiệm</h3><p>Mỗi người góp phần tạo nên đường phố văn minh.</p></div><div class="card"><div class="icon">🏡</div><h3>Từ địa phương</h3><p>Thay đổi bắt đầu ngay trên con đường quen thuộc.</p></div></div></div>
+  </section>
+  <section class="slide" data-title="Thực trạng">
+    <div class="kicker">03 / Thực trạng</div><h2>Những điều dễ gặp trên đường.</h2>
+    <div class="cards"><div class="card"><div class="tag">01</div><div class="icon">🪖</div><h3>Quên mũ bảo hiểm</h3><p>Một số người đi xe máy hoặc xe điện chưa đội mũ, hoặc đội nhưng cài quai không đúng cách.</p></div><div class="card yellow"><div class="tag">02</div><div class="icon">📱</div><h3>Mất tập trung</h3><p>Vừa di chuyển vừa nhìn điện thoại, đùa nghịch hoặc nói chuyện thiếu chú ý.</p></div><div class="card dark"><div class="tag">03</div><div class="icon">↔️</div><h3>Đi sai phần đường</h3><p>Lấn làn, vượt ẩu hoặc chuyển hướng mà không quan sát và báo hiệu.</p></div><div class="card mint-card"><div class="tag">04</div><div class="icon">🚸</div><h3>Khu vực đông người</h3><p>Trước cổng trường, chợ và ngã tư dễ ùn tắc khi mọi người dừng đỗ tùy tiện.</p></div></div>
+    <p class="note">Các ví dụ trên là những tình huống cần chú ý, không phải số liệu thống kê riêng của địa phương.</p>
+  </section>
+  <section class="slide" data-title="Nội dung trọng tâm">
+    <div class="kicker">04 / Điều cần nhớ</div><h2>Bốn nguyên tắc <span class="mint">không mặc cả</span>.</h2>
+    <div class="cards"><div class="card yellow"><div class="icon">🪖</div><h3>Đội mũ đúng cách</h3><p>Chọn mũ bảo hiểm phù hợp, cài quai chắc chắn khi đi xe máy hoặc xe máy điện.</p></div><div class="card dark"><div class="icon">🚦</div><h3>Tuân thủ tín hiệu</h3><p>Chấp hành đèn giao thông, biển báo và vạch kẻ đường; dừng đúng vị trí.</p></div><div class="card mint-card"><div class="icon">🛣️</div><h3>Đi đúng phần đường</h3><p>Đi đúng làn, giữ khoảng cách, giảm tốc độ khi qua giao lộ và nơi đông người.</p></div><div class="card"><div class="icon">📵</div><h3>Không xao nhãng</h3><p>Không dùng điện thoại khi điều khiển phương tiện, không nô đùa dưới lòng đường.</p></div></div>
+  </section>
+  <section class="slide" data-title="Nguy cơ tai nạn">
+    <div class="kicker">05 / Nhận diện rủi ro</div><h2>Tai nạn thường bắt đầu từ <span class="coral">một phút chủ quan</span>.</h2>
+    <div class="risk-layout"><div class="bars"><div><div class="bar-label"><span>Thiếu quan sát</span><strong class="coral">Rủi ro cao</strong></div><div class="bar-track"><div class="bar-fill fill1"></div></div></div><div><div class="bar-label"><span>Không chấp hành tín hiệu</span><strong class="accent">Rủi ro cao</strong></div><div class="bar-track"><div class="bar-fill fill2"></div></div></div><div><div class="bar-label"><span>Đi nhanh, bám sát xe trước</span><strong class="blue">Cần tránh</strong></div><div class="bar-track"><div class="bar-fill fill3"></div></div></div><p class="note">Minh họa mức độ cần lưu ý, không phải tỷ lệ tai nạn hay kết quả khảo sát.</p></div><div class="panel"><div class="eyebrow">Hậu quả có thể xảy ra</div><h3 style="font-size:clamp(24px,3vw,34px);margin-top:14px">Một hành vi nguy hiểm có thể ảnh hưởng đến nhiều người.</h3><p>Va chạm gây thương tích, thiệt hại tài sản, ùn tắc giao thông và để lại nỗi lo cho gia đình.</p><div class="road-line"><span class="dot"></span><div class="lane"></div><span style="font-size:25px">⚠️</span></div><p style="font-size:14px;margin-bottom:0">Đi chậm hơn vài giây vẫn tốt hơn đánh cược với sự an toàn.</p></div></div>
+  </section>
+  <section class="slide" data-title="Vai trò của mọi người">
+    <div class="kicker">06 / Cùng chịu trách nhiệm</div><h2>An toàn giao thông không phải việc của riêng ai.</h2>
+    <div class="cards"><div class="card yellow"><div class="icon">🏛️</div><h3>Cơ quan chức năng</h3><p>Tổ chức giao thông hợp lý, kiểm tra và tuyên truyền, xử lý hành vi vi phạm theo quy định.</p></div><div class="card dark"><div class="icon">🏫</div><h3>Nhà trường</h3><p>Giáo dục kỹ năng, nhắc nhở học sinh và phối hợp bảo đảm an toàn trước cổng trường.</p></div><div class="card mint-card"><div class="icon">👨‍👩‍👧</div><h3>Gia đình</h3><p>Làm gương khi tham gia giao thông, chuẩn bị mũ bảo hiểm và hướng dẫn con đi đường an toàn.</p></div><div class="card"><div class="icon">🤝</div><h3>Mỗi người dân</h3><p>Chấp hành luật, nhường nhịn, không cổ vũ hành vi nguy hiểm và nhắc nhau đúng cách.</p></div></div>
+  </section>
+  <section class="slide" data-title="Hành động an toàn">
+    <div class="kicker">07 / Biến kiến thức thành hành động</div><h2>Trước khi đi, hãy tự kiểm tra.</h2>
+    <div class="two-col"><div class="panel"><div class="eyebrow">Checklist mỗi chuyến đi</div><div class="list" style="margin-top:18px"><div class="person"><span class="num">✓</span>Đội mũ bảo hiểm và cài quai đúng cách.</div><div class="person"><span class="num">✓</span>Kiểm tra phương tiện, quan sát trước khi đi.</div><div class="person"><span class="num">✓</span>Tuân thủ đèn tín hiệu, biển báo và vạch đường.</div><div class="person"><span class="num">✓</span>Không dùng điện thoại khi điều khiển xe.</div><div class="person"><span class="num">✓</span>Giảm tốc độ, nhường đường khi cần thiết.</div></div></div><div><div class="eyebrow">Thói quen nhỏ · Ý nghĩa lớn</div><h3 style="font-size:clamp(26px,3.5vw,42px);margin-top:16px">Đi đúng luật là bảo vệ chính mình và những người mình chưa từng gặp.</h3><p>Hãy bắt đầu bằng hành động của bản thân, sau đó lan tỏa bằng cách nhắc nhở nhẹ nhàng và làm gương cho bạn bè.</p><div class="steps"><div class="step"><div class="n">BƯỚC 01</div><h3>Nhớ luật</h3><p>Hiểu tín hiệu và quy tắc.</p></div><div class="step"><div class="n">BƯỚC 02</div><h3>Làm đúng</h3><p>Giữ thói quen mỗi ngày.</p></div><div class="step"><div class="n">BƯỚC 03</div><h3>Nhắc nhau</h3><p>Góp ý văn minh.</p></div><div class="step"><div class="n">BƯỚC 04</div><h3>Lan tỏa</h3><p>Cùng xây dựng nếp tốt.</p></div></div></div></div>
+  </section>
+  <section class="slide" data-title="Kết luận">
+    <div class="kicker">08 / Thông điệp</div><h2>Đường an toàn bắt đầu từ <span class="accent">mình</span>.</h2><p>An toàn giao thông không nằm ở khẩu hiệu treo trên tường, mà thể hiện qua từng lần dừng đèn đỏ, từng chiếc mũ được cài quai và từng quyết định nhường đường.</p><div class="stat-grid"><div class="stat"><strong>01</strong><span>Luôn đặt an toàn lên trước sự vội vàng.</span></div><div class="stat"><strong>02</strong><span>Tôn trọng luật và những người cùng tham gia giao thông.</span></div><div class="stat"><strong>03</strong><span>Bắt đầu từ bản thân, lan tỏa đến cộng đồng.</span></div></div><div class="road-line"><span class="dot" style="background:var(--mint);border-color:#c4fff0"></span><div class="lane"></div><span style="font-size:22px">🏡</span></div>
+  </section>
+  <section class="slide thanks" data-title="Cảm ơn">
+    <div class="stamp">✓</div><div class="kicker" style="justify-content:center">Nhóm 3 · Xin cảm ơn</div><h2><span class="accent">CẢM ƠN</span><br>ĐÃ LẮNG NGHE!</h2><p>Mỗi người đi đúng luật, mỗi con đường thêm bình yên.</p><div class="cover-bottom" style="justify-content:center"><span class="pill">🚦 An toàn là lựa chọn</span><span class="pill">💛 Hãy cùng thực hiện</span></div>
+  </section>
+  <nav class="controls" aria-label="Điều khiển trình chiếu"><button class="control-btn" id="prev" aria-label="Trang trước" title="Trang trước (←)">‹</button><div class="progress-wrap" aria-label="Tiến trình"><div class="progress" id="progress"></div></div><div class="dots" id="dots" aria-label="Chọn trang"></div><span class="counter" id="counter">01 / 10</span><span class="hint">← → chuyển trang · F toàn màn hình</span><button class="control-btn" id="next" aria-label="Trang tiếp" title="Trang tiếp (→)">›</button><button class="control-btn" id="full" aria-label="Toàn màn hình" title="Toàn màn hình (F)">⛶</button></nav>
 </main>
-
 <script>
-const TOTAL = 10;
-
-let current = 1;
-let busy = false;
-
-const slide = document.getElementById("slide");
-const count = document.getElementById("count");
-const bar = document.getElementById("bar");
-const stage = document.getElementById("stage");
-
-function updateUI() {
-  count.textContent =
-    String(current).padStart(2, "0") + " / " + TOTAL;
-
-  bar.style.width = (current / TOTAL * 100) + "%";
-}
-
-function goTo(number) {
-  if (busy) return;
-
-  const next = Math.max(1, Math.min(TOTAL, number));
-  if (next === current) return;
-
-  busy = true;
-
-  const direction = next > current ? "out-next" : "out-prev";
-
-  slide.classList.add(direction);
-  current = next;
-  updateUI();
-
-  setTimeout(() => {
-    slide.src =
-      "presentation.pdf#page=" + current +
-      "&toolbar=0&navpanes=0&view=Fit";
-
-    slide.onload = () => {
-      slide.classList.remove("out-next", "out-prev");
-      busy = false;
-    };
-
-    // Dự phòng nếu trình xem PDF không phát sự kiện load.
-    setTimeout(() => {
-      slide.classList.remove("out-next", "out-prev");
-      busy = false;
-    }, 900);
-  }, 300);
-}
-
-document.getElementById("prev").onclick = () =>
-  goTo(current - 1);
-
-document.getElementById("next").onclick = () =>
-  goTo(current + 1);
-
-document.getElementById("fullscreen").onclick = async () => {
-  try {
-    if (!document.fullscreenElement) {
-      await stage.requestFullscreen();
-    } else {
-      await document.exitFullscreen();
-    }
-  } catch (error) {
-    alert("Không thể bật toàn màn hình trên trình duyệt này.");
+(() => {
+  const slides = [...document.querySelectorAll('.slide')];
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  const counter = document.getElementById('counter');
+  const progress = document.getElementById('progress');
+  const dots = document.getElementById('dots');
+  const full = document.getElementById('full');
+  let current = 0;
+  slides.forEach((slide, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button'; dot.title = `Đến trang ${i + 1}: ${slide.dataset.title}`;
+    dot.setAttribute('aria-label', dot.title);
+    dot.addEventListener('click', () => show(i));
+    dots.appendChild(dot);
+  });
+  const dotButtons = [...dots.children];
+  function show(index) {
+    const target = Math.max(0, Math.min(slides.length - 1, index));
+    if (target === current && slides[current].classList.contains('active')) return;
+    const direction = target > current ? 1 : -1;
+    slides.forEach((s, i) => {
+      s.classList.remove('active', 'exit-left');
+      if (i === current) s.classList.add(direction > 0 ? 'exit-left' : '');
+    });
+    current = target;
+    slides[current].classList.add('active');
+    counter.textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+    progress.style.width = `${((current + 1) / slides.length) * 100}%`;
+    prev.disabled = current === 0; next.disabled = current === slides.length - 1;
+    dotButtons.forEach((d, i) => { d.classList.toggle('active', i === current); if (i === current) d.setAttribute('aria-current', 'step'); else d.removeAttribute('aria-current'); });
+    document.title = `${slides[current].dataset.title} | An toàn giao thông`;
   }
-};
-
-document.addEventListener("keydown", event => {
-  if (
-    event.target.tagName === "INPUT" ||
-    event.target.tagName === "TEXTAREA"
-  ) return;
-
-  if (event.key === "ArrowRight" || event.key === " ") {
-    event.preventDefault();
-    goTo(current + 1);
-  }
-
-  if (event.key === "ArrowLeft") {
-    event.preventDefault();
-    goTo(current - 1);
-  }
-
-  if (event.key.toLowerCase() === "f") {
-    document.getElementById("fullscreen").click();
-  }
-});
-
-updateUI();
+  prev.addEventListener('click', () => show(current - 1));
+  next.addEventListener('click', () => show(current + 1));
+  full.addEventListener('click', async () => {
+    try { if (!document.fullscreenElement) await document.getElementById('deck').requestFullscreen(); else await document.exitFullscreen(); } catch (_) {}
+  });
+  document.addEventListener('keydown', e => {
+    if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); show(current + 1); }
+    if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') show(0);
+    if (e.key === 'End') show(slides.length - 1);
+    if (e.key.toLowerCase() === 'f') full.click();
+  });
+  let startX = null;
+  document.getElementById('deck').addEventListener('touchstart', e => { startX = e.changedTouches[0].clientX; }, {passive:true});
+  document.getElementById('deck').addEventListener('touchend', e => { if (startX === null) return; const dx = e.changedTouches[0].clientX - startX; if (Math.abs(dx) > 55) show(current + (dx < 0 ? 1 : -1)); startX = null; }, {passive:true});
+  show(0);
+})();
 </script>
 </body>
 </html>
