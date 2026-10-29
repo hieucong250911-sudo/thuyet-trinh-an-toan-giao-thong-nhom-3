@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>An toàn giao thông ở địa phương em</title>
+
+<style>
+:root {
+  --bg: #10111b;
+  --pink: #f7a8cb;
+  --panel: #202131;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at top, #34223d 0%, transparent 60%),
+    var(--bg);
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+}
+
+.heading {
+  text-align: center;
+  color: var(--pink);
+  letter-spacing: 3px;
+  font-size: clamp(13px, 2vw, 19px);
+  animation: appear 1s ease both;
+}
+
+.heading small {
+  display: block;
+  color: #c7c2d6;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-top: 7px;
+}
+
+.stage {
+  position: relative;
+  width: min(94vw, 1200px);
+  aspect-ratio: 16 / 9;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px #ffffff20,
+    0 15px 70px #0008,
+    0 0 45px #ed80bd22;
+  perspective: 1600px;
+}
+
+#slide {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: white;
+  opacity: 1;
+  transform: translateX(0) rotateY(0);
+  transition:
+    opacity .35s ease,
+    transform .55s cubic-bezier(.2,.75,.2,1);
+}
+
+#slide.out-next {
+  opacity: 0;
+  transform: translateX(-35px) rotateY(-4deg) scale(.98);
+}
+
+#slide.out-prev {
+  opacity: 0;
+  transform: translateX(35px) rotateY(4deg) scale(.98);
+}
+
+.glow {
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  border: 1px solid #ffffff25;
+  border-radius: inherit;
+}
+
+.sparkle {
+  position: fixed;
+  pointer-events: none;
+  color: #ffd5e7;
+  font-size: 22px;
+  opacity: .55;
+  animation: drift 5s ease-in-out infinite;
+}
+
+.s1 { top: 12%; left: 5%; }
+.s2 { top: 22%; right: 6%; animation-delay: -2s; }
+.s3 { bottom: 12%; left: 8%; animation-delay: -3s; }
+
+@keyframes drift {
+  0%, 100% {
+    transform: translateY(0) rotate(-8deg);
+  }
+  50% {
+    transform: translateY(-13px) rotate(8deg);
+  }
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+button {
+  font: inherit;
+  font-size: 13px;
+  color: white;
+  background: var(--panel);
+  border: 1px solid #ffffff24;
+  border-radius: 28px;
+  padding: 12px 17px;
+  cursor: pointer;
+  transition:
+    background .25s ease,
+    transform .25s ease,
+    border-color .25s ease;
+}
+
+button:hover {
+  background: #613653;
+  border-color: var(--pink);
+  transform: translateY(-2px);
+}
+
+#count {
+  color: var(--pink);
+  min-width: 65px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.progress {
+  width: min(94vw, 1200px);
+  height: 3px;
+  background: #ffffff18;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#bar {
+  height: 100%;
+  width: 10%;
+  background: linear-gradient(90deg, #d76ca6, #ffd5e7);
+  transition: width .45s ease;
+}
+
+.hint {
+  text-align: center;
+  color: #aaa7bd;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+@media (max-width: 600px) {
+  .app { padding: 8px; gap: 12px; }
+  .stage { width: 98vw; border-radius: 5px; }
+  button { padding: 10px 12px; font-size: 12px; }
+  .heading { letter-spacing: 1.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<main class="app">
+
+  <div class="sparkle s1">✧</div>
+  <div class="sparkle s2">✦</div>
+  <div class="sparkle s3">✧</div>
+
+  <header class="heading">
+    AN TOÀN GIAO THÔNG
+    <small>BÀI THUYẾT TRÌNH · 2026</small>
+  </header>
+
+  <section class="stage" id="stage">
+    <iframe
+      id="slide"
+      src="presentation.pdf#page=1&toolbar=0&navpanes=0&view=Fit"
+      title="Bài thuyết trình an toàn giao thông">
+    </iframe>
+    <div class="glow"></div>
+  </section>
+
+  <div class="progress">
+    <div id="bar"></div>
+  </div>
+
+  <nav class="controls">
+    <button id="prev">❮ Trang trước</button>
+    <span id="count">01 / 10</span>
+    <button id="next">Trang tiếp ❯</button>
+    <button id="fullscreen">⛶ Toàn màn hình</button>
+  </nav>
+
+  <p class="hint">
+    ← → Chuyển trang &nbsp; · &nbsp;
+    F Toàn màn hình &nbsp; · &nbsp;
+    ESC Thoát trình chiếu
+  </p>
+
+</main>
+
+<script>
+const TOTAL = 10;
+
+let current = 1;
+let busy = false;
+
+const slide = document.getElementById("slide");
+const count = document.getElementById("count");
+const bar = document.getElementById("bar");
+const stage = document.getElementById("stage");
+
+function updateUI() {
+  count.textContent =
+    String(current).padStart(2, "0") + " / " + TOTAL;
+
+  bar.style.width = (current / TOTAL * 100) + "%";
+}
+
+function goTo(number) {
+  if (busy) return;
+
+  const next = Math.max(1, Math.min(TOTAL, number));
+  if (next === current) return;
+
+  busy = true;
+
+  const direction = next > current ? "out-next" : "out-prev";
+
+  slide.classList.add(direction);
+  current = next;
+  updateUI();
+
+  setTimeout(() => {
+    slide.src =
+      "presentation.pdf#page=" + current +
+      "&toolbar=0&navpanes=0&view=Fit";
+
+    slide.onload = () => {
+      slide.classList.remove("out-next", "out-prev");
+      busy = false;
+    };
+
+    // Dự phòng nếu trình xem PDF không phát sự kiện load.
+    setTimeout(() => {
+      slide.classList.remove("out-next", "out-prev");
+      busy = false;
+    }, 900);
+  }, 300);
+}
+
+document.getElementById("prev").onclick = () =>
+  goTo(current - 1);
+
+document.getElementById("next").onclick = () =>
+  goTo(current + 1);
+
+document.getElementById("fullscreen").onclick = async () => {
+  try {
+    if (!document.fullscreenElement) {
+      await stage.requestFullscreen();
+    } else {
+      await document.exitFullscreen();
+    }
+  } catch (error) {
+    alert("Không thể bật toàn màn hình trên trình duyệt này.");
+  }
+};
+
+document.addEventListener("keydown", event => {
+  if (
+    event.target.tagName === "INPUT" ||
+    event.target.tagName === "TEXTAREA"
+  ) return;
+
+  if (event.key === "ArrowRight" || event.key === " ") {
+    event.preventDefault();
+    goTo(current + 1);
+  }
+
+  if (event.key === "ArrowLeft") {
+    event.preventDefault();
+    goTo(current - 1);
+  }
+
+  if (event.key.toLowerCase() === "f") {
+    document.getElementById("fullscreen").click();
+  }
+});
+
+updateUI();
+</script>
+</body>
+</html>
